@@ -11,9 +11,9 @@ WHERE EmployeeID = (
     WHERE salary > 70000.00
     LIMIT 1
 );
--- 3 subpoint: delete employees withoot projects
+-- 3 subpoint: delete employees without projects
 DELETE FROM Employees e
-WHERE e.EmployeeID NOT EXISTS(
+WHERE NOT EXISTS(
     SELECT 1
     FROM EmployeeProjects ep
     WHERE ep.EmployeeId = e.EmployeeID
