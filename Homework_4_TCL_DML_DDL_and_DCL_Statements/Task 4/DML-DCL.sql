@@ -13,18 +13,23 @@ WHERE EmployeeID = (
 );
 -- 3 subpoint: delete employees withoot projects
 DELETE FROM Employees e
-WHERE e.EmployeeID NOT IN (
-    SELECT EmployeeId 
-    FROM EmployeeProjects 
-    WHERE EmployeeId IS NOT NULL
+WHERE e.EmployeeID NOT EXISTS(
+    SELECT 1
+    FROM EmployeeProjects ep
+    WHERE ep.EmployeeId = e.EmployeeID
 );
 -- 4 subpoint:  transaction with 2 inserts (into tables project and EmployeeProjects)
 START TRANSACTION;
-INSERT INTO Projects (ProjectName, Budget, StartDate, EndDate) VALUES
-('Website Creation', 100000.00, '2026-06-15', '2026-12-30');
-INSERT INTO EmployeeProjects (EmployeeID, ProjectID, HoursWorked) VALUES
-(1, 4, 130),
-(2, 4, 135);
+
+WITH new_project AS (
+    INSERT INTO Projects (ProjectName, Budget, StartDate, EndDate)
+    VALUES ('Website Creation', 100000.00, '2026-06-15', '2026-12-30')
+    RETURNING ProjectID
+)
+
+INSERT INTO EmployeeProjects (EmployeeID, ProjectID, HoursWorked)
+VALUES
+    (1, (SELECT ProjectID FROM new_project), 130),
+    (2, (SELECT ProjectID FROM new_project), 135);
+
 COMMIT;
-
-
