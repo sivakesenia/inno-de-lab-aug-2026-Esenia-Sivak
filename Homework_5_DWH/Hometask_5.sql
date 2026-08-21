@@ -43,7 +43,7 @@ SELECT
     SUM(f.total_revenue) AS total_revenue,
     AVG(f.total_revenue) AS average_revenue_per_ticket
 FROM fact_ticket_sales f
-JOIN dim_event e ON f.event_sk = e.event
+JOIN dim_event e ON f.event_sk = e.event_sk
 JOIN dim_event_category ec ON e.event_category_sk = ec.event_category_sk
 GROUP BY
     ec.category_name

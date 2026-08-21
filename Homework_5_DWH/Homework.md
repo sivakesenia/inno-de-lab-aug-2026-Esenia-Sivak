@@ -9,7 +9,7 @@
 ## 2.3. Dimensions:
 
 ### • dim_event – "What?"
-Attributes: event_sk, sourсe_event_id, title, start_time, duration, FK(venue_sk)
+Attributes: event_sk, sourсe_event_id, title, start_time, duration, FK(venue_sk), FK(event_category_sk)
 
 ### • dim_venue – "Where?"
 Attributes: venue_sk, sourсe_venue_id, venue_name, address, city, FK(country_sk), capacity
@@ -27,7 +27,7 @@ Attributes: date_sk, sourсe_date_id, year, month, day, week_day
 Attributes: seat_category_sk, source_category_id, seat_type, row, number, FK(venue_sk)
 
 ### • dim_event_category –"What event type?"
-Attributes: event_category_sk, source_event_id, category_name, description, FK(event_sk)
+Attributes: event_category_sk, source_event_category_id, category_name, description
 
 ## 2.4. Fact table: fact_ticket_sales:
 
@@ -35,6 +35,7 @@ Attributes: event_category_sk, source_event_id, category_name, description, FK(e
 - event_sk
 - customer_sk
 - date_sk
+- seat_category_sk 
 
 ### PK: 
 - sales_sk
