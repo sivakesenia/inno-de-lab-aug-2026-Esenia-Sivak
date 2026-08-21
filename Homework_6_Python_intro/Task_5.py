@@ -9,11 +9,13 @@ while attempt > 0:
     if not guess.isdigit():  # little check
         print("Input the digit!")
         continue
+
+    guess = int(guess)
+
     if guess not in range(1, 21):  # little check
         print("I picked a number from 1 to 20")
         continue
 
-    guess = int(guess)
     attempt -= 1
 
     if guess == number:
