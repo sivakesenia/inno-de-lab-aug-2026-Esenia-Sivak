@@ -25,8 +25,9 @@ def performance_logger(func: Callable) -> Callable:
         elapsed_time = time.perf_counter() - start_time
 
         print(
-            f"{PERFORMANCE_LOG_PREFIX} Function '{func.__name__}' executed in {elapsed_time:.{TIME_DECIMALS}f} sec."
-        )
+            f"{PERFORMANCE_LOG_PREFIX} Функция '{func.__name__}' "
+            f"выполнена за {elapsed_time:.{TIME_DECIMALS}f} сек."  # according to the task TIME_DECIMALS = 8,
+        )                                                          # but in example(expected results) 4 decimal places
 
         # return the result of the original function
         return result
@@ -76,13 +77,13 @@ test_cases = [
     {"name": "TEST 3", "data": [{"category": "Drama", "total_sales": 500.00}]},
 ]
 
-print("TESTING")
+print("=== ТЕСТИРОВАНИЕ ПРОИЗВОДИТЕЛЬНОСТИ ===")
 
 for test_case in test_cases:
     print(f"\n--- {test_case['name']} ---")
 
     sorted_report = get_sorted_report(test_case["data"])
 
-    print("Top categories by revenue:")
+    print("Топ категорий по выручке:")
     for idx, item in enumerate(sorted_report, 1):
         print(f"{idx}. {item['category']}: {item['total_sales']}")

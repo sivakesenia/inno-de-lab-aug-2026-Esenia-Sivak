@@ -15,7 +15,7 @@ def calculate_rental_batch(
 
     Returns:
         tuple[float, bool]:
-            - total_sum (float): total batch cost rounded to 2 decimals
+            - final_sum (float): total batch cost rounded to 2 decimals
             - is_limit_exceeded (bool): True if final_sum > MAX_RENTAL_BATCH_LIMIT,
               False otherwise
 
@@ -29,20 +29,20 @@ def calculate_rental_batch(
     return final_sum, is_limit_exceeded
 
 
-print("RENTAL BATCH REPORT")
+print("=== ОТЧЕТ ПО ПАРТИЯМ АРЕНДЫ ===")
 
 # test 1
-test1 = calculate_rental_batch(30, 2.99)
-print(f"Batch 1 (Academy Dinosaur): Total ${test1[0]}. Limit exceeded: {test1[1]}")
+test1 = calculate_rental_batch(quantity=30, rental_rate=2.99)
+print(f"Партия 1 (Academy Dinosaur): Сумма  ${test1[0]}. Превышение лимита: {test1[1]}")
 
 # test 2
-test2 = calculate_rental_batch(40, 4.99, 0.1)
-print(f"Batch 2 (Affair Prejudice): Total ${test2[0]}. Limit exceeded: {test2[1]}")
+test2 = calculate_rental_batch(quantity=40, rental_rate=4.99, discount=0.1)
+print(f"Партия 2 (Affair Prejudice): Сумма ${test2[0]}. Превышение лимита: {test2[1]}")
 
 # test 3
-test3 = calculate_rental_batch(10, 1.99)
-print(f"Batch 3 (Agent Truman): Total ${test3[0]}. Limit exceeded: {test3[1]}")
+test3 = calculate_rental_batch(quantity=10, rental_rate=1.99)
+print(f"Партия 3 (Agent Truman): Сумма ${test3[0]}. Превышение лимита: {test3[1]}")
 
 # test 4
-test4 = calculate_rental_batch(50, 3.50, 0.2)
-print(f"Batch 4 (African Egg): Total ${test4[0]}. Limit exceeded: {test4[1]}")
+test4 = calculate_rental_batch(quantity=50, rental_rate=3.50, discount=0.2)
+print(f"Партия 4 (African Egg): Сумма ${test4[0]}. Превышение лимита: {test4[1]}")
